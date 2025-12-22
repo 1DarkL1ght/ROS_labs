@@ -9,7 +9,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     pkg_name = 'my_robot_description'
-    urdf_file_name = '01-myfirst.urdf'
+    urdf_file_name = 'robot.gazebo.xacro'
 
     pkg_share = FindPackageShare(pkg_name)
     urdf_path = PathJoinSubstitution([pkg_share, 'urdf', urdf_file_name])
@@ -24,7 +24,7 @@ def generate_launch_description():
 
     gz_resource_path += ":" + os.path.dirname(install_dir)
 
-    path_to_my_models = '/home/vlada/ros2_ws/src/my_robot_description'
+    path_to_my_models = '~/georg/ros2_ws/lab6/ex01/my_robot_description'
     gz_resource_path += ":" + path_to_my_models
 
     resource_env = SetEnvironmentVariable(
@@ -40,8 +40,6 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(ros_gz_sim_pkg, 'launch', 'gz_sim.launch.py')
         ),
-        # launch_arguments={'gz_args': '-r /home/vlada/ros2_ws/src/my_robot_description/urdf/my_world.sdf'}.items(),
-        # launch_arguments={'gz_args': '-r -v 4 --render-engine ogre /home/vlada/ros2_ws/src/my_robot_description/urdf/test_lidar.sdf'}.items(),
         launch_arguments={'gz_args': '-r gpu_lidar_sensor.sdf'}.items(),
     )
 
